@@ -11,3 +11,4 @@ wheels/
 
 # development
 *.log
+*cache.json

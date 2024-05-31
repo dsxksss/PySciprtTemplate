@@ -19,21 +19,26 @@ def parse_timestamp(timestamp, custom_strfmt="%Y-%m-%d %H:%M:%S"):
     return formatted
 
 
-def set_logging_default_config() -> None:
-    Log_level = 15
+def set_logging_default_config(
+    log_level: int = 15,
+    file_log_level: int = 15,
+    console_log_level: int = 15,
+    log_file_save_div: str = "./logs",
+) -> None:
     logging.addLevelName(15, "TEMPLATE_DEBUG")
 
     console_handler = logging.StreamHandler()
-    save_dir = "./logs"
-    mkdir_if_not_exist(save_dir)
+    mkdir_if_not_exist(log_file_save_div)
 
     # file_handler = logging.FileHandler(
-    #     f"./{save_dir}/template-{parse_timestamp(float(time.time()),'%Y-%m-%d-%H-%M-%S')}.log",
+    #     f"./{log_file_save_div}/template-{parse_timestamp(float(time.time()),'%Y-%m-%d-%H-%M-%S')}.log",
     #     encoding="utf-8",
     # )
-    file_handler = logging.FileHandler(f"./{save_dir}/template.log", encoding="utf-8")
-    console_handler.setLevel(Log_level)
-    file_handler.setLevel(Log_level)
+    file_handler = logging.FileHandler(
+        f"./{log_file_save_div}/template.log", encoding="utf-8"
+    )
+    console_handler.setLevel(console_log_level)
+    file_handler.setLevel(file_log_level)
 
     console_format = logging.Formatter(
         "[%(asctime)s] %(funcName)s - %(levelname)s | %(message)s"
@@ -45,7 +50,7 @@ def set_logging_default_config() -> None:
     console_handler.setFormatter(console_format)
     file_handler.setFormatter(file_format)
 
-    logging.basicConfig(level=Log_level, handlers=[console_handler, file_handler])
+    logging.basicConfig(level=log_level, handlers=[console_handler, file_handler])
 
 
 def get_sha256_hash_of_file(file_path):
