@@ -34,7 +34,7 @@ class ConfigHandler(BaseModel):
 
 def load_config_from_toml(config_path: str) -> ConfigHandler:
     # 读取TOML配置文件
-    with open(config_path, "r") as f:
+    with open(config_path, "r", encoding="utf-8") as f:
         config_data = toml.load(f)
 
     # 创建ConfigModel实例并返回

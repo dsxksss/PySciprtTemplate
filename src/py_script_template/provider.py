@@ -20,3 +20,9 @@ class BaseProvider:
 #     pass
 
 global_provider = BaseProvider("config.toml")
+
+if __name__ == "__main__":
+    from py_script_template.config import ConfigFields
+
+    handler = global_provider.config_handler
+    print(handler.get(ConfigFields.LOG_FILE_SAVE_PATH, "Null Config"))
