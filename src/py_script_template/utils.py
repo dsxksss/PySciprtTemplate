@@ -1,4 +1,5 @@
 import hashlib
+import json
 import logging
 import os
 from datetime import datetime
@@ -81,3 +82,13 @@ def is_within_days(days: int, new_timestamp: float, old_timestamp: float):
 
     # 判断差值是否在两天之内
     return delta <= datetime.timedelta(days=days)  # type: ignore
+
+
+def set_progress_value(value: int):
+    if value < 0 or value > 100:
+        raise ValueError(
+            "ProgressValue must be between 0 and 100, but got [{value}].".format(value)
+        )
+
+    with open("./state.json", "w", encoding="utf-8") as f:
+        json.dump({"ProgressValue": value}, f)
