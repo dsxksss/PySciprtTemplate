@@ -12,3 +12,5 @@ wheels/
 # development
 *.log
 *cache.json
+
+state.json
