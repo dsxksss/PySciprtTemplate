@@ -15,7 +15,7 @@ TYPE_MAP = {
 
 def safe_type_cast(value: Any, target_type: Union[type, str]) -> Any:
     """
-    安全地将值转换为目标类型。避免使用eval, 提高安全性。
+    安全地将值转换为目标类型, 避免使用eval, 提高安全性
     """
     if isinstance(target_type, str):
         target_type = TYPE_MAP.get(target_type, str)
@@ -30,7 +30,7 @@ def safe_type_cast(value: Any, target_type: Union[type, str]) -> Any:
 
 def read_config(config_path: str) -> Dict[str, Any]:
     """
-    读取并返回TOML配置文件的内容。
+    读取并返回TOML配置文件的内容
     """
     try:
         with open(config_path, "r", encoding="utf-8") as config_file:
@@ -45,7 +45,7 @@ def read_config(config_path: str) -> Dict[str, Any]:
 
 def parse_arguments(config: Dict[str, Any]) -> argparse.Namespace:
     """
-    根据配置解析命令行参数, 并返回解析后的Namespace对象。
+    根据配置解析命令行参数, 并返回解析后的Namespace对象
     """
     parser = argparse.ArgumentParser(description=config.get("description", "CLI Tool"))
     for arg, details in config.get("arguments", {}).items():
@@ -69,7 +69,7 @@ def parse_arguments(config: Dict[str, Any]) -> argparse.Namespace:
 
 def get_cli_argument(config_path: str) -> Dict[str, Any]:
     """
-    读取TOML配置文件并解析命令行参数, 返回解析后的参数字典。
+    读取TOML配置文件并解析命令行参数, 返回解析后的参数字
     """
     config = read_config(config_path)
     parsed_args = parse_arguments(config)
