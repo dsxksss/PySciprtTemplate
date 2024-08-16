@@ -19,7 +19,7 @@ def main() -> int:
         set_progress_value(5)
         set_logging_default_config()
 
-        # 获取
+        # 获取cli参数配置文件
         config_file = os.path.join(script_dir, "..", "..", "cli_config.toml")
         arguments = get_cli_argument(config_file)
         logging.debug(f"Input Arguments: {arguments}")
